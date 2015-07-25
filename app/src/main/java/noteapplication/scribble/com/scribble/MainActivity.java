@@ -42,6 +42,17 @@ public class MainActivity extends Activity {
 
             }
         });
+
+
+        final FloatingActionButton actionB = (FloatingActionButton) findViewById(R.id.action_draw);
+        actionB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent newIntent = new Intent(MainActivity.this,DrawingActivity.class);
+                startActivity(newIntent);
+
+            }
+        });
     }
 
     @Override
