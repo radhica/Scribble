@@ -19,6 +19,9 @@
         <activity android:name=".NoteDetailActivity"
             android:label="Note Detail">
         </activity>
+        <activity android:name=".DrawingActivity"
+            android:label="Draw">
+        </activity>
     </application>
 
 </manifest>
