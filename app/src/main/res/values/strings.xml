@@ -11,5 +11,6 @@
     <string name="note">Note</string>
     <string name="art">Art</string>
     <string name="clear_canvas">CLEAR CANVAS</string>
+    <string name="menu_search">Search</string>
 
 </resources>
