@@ -1,4 +1,4 @@
-package noteapplication.scribble.com.scribble;
+package UIcontrols;
 
 /**
  * Created by rsampath on 7/24/15.

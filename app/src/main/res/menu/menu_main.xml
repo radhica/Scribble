@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/action_save"
+        android:menuCategory="container"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:title="@string/save"
+        />
+    <item android:id="@+id/action_discard"
+        android:menuCategory="container"
+        android:orderInCategory="100"
+        app:showAsAction="always"
+        android:title="@string/discard"
+        />
+</menu>

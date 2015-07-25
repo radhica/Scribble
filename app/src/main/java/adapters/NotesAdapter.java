@@ -1,14 +1,16 @@
-package noteapplication.scribble.com.scribble;
+package adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.List;
+
+import modelObjects.Notes;
+import noteapplication.scribble.com.scribble.R;
 
 /**
  * Created by rsampath on 7/24/15.
@@ -34,8 +36,8 @@ public class NotesAdapter extends ArrayAdapter<Notes> {
             convertView = inflater.inflate(R.layout.list_item_notes, parent, false);
 
             viewHolder = new ViewHolder();
-            viewHolder.title = (EditText) convertView.findViewById(R.id.notes_title);
-            viewHolder.description = (EditText) convertView.findViewById(R.id.notes_description);
+            viewHolder.title = (TextView) convertView.findViewById(R.id.notes_title);
+            viewHolder.description = (TextView) convertView.findViewById(R.id.notes_description);
 
             convertView.setTag(viewHolder);
 
@@ -44,19 +46,15 @@ public class NotesAdapter extends ArrayAdapter<Notes> {
         }
 
         Notes notesObject = getItem(position);
-
-        String description = notesObject.getDescription();
-        String lines[] = description.split("\\r?\\n");
-
-        viewHolder.title.setText(notesObject.title);
-        viewHolder.description.setText(lines[0]);
+        viewHolder.title.setText(notesObject.getTitle());
+        viewHolder.description.setText(notesObject.getDescription());
 
         return convertView;
     }
 
     public static class ViewHolder {
-        public EditText title;
-        public EditText description;
+        public TextView title;
+        public TextView description;
     }
 
 }

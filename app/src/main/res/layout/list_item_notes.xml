@@ -2,29 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/layout_rounded_bg"
-    android:layout_margin="15dp"
-
     >
-
-    <EditText
+    <TextView
         android:id="@+id/notes_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:background="@null"
         />
 
-    <EditText
+    <TextView
         android:id="@+id/notes_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:background="@null"
         />
 
 </LinearLayout>

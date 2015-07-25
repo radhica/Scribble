@@ -5,6 +5,11 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="save">Save</string>
-
+    <string name="discard">Discard</string>
+    <string name="title">Enter title</string>
+    <string name="add_notes">Add notes</string>
+    <string name="note">Note</string>
+    <string name="art">Art</string>
+    <string name="clear_canvas">CLEAR CANVAS</string>
 
 </resources>
