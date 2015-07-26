@@ -132,6 +132,7 @@ public class MainActivity extends ActionBarActivity {
         searchView.setSearchableInfo(
                 searchManager.getSearchableInfo(getComponentName()));
 
+        searchView.setSubmitButtonEnabled(true);
 
         SearchView.OnQueryTextListener textChangeListener = new SearchView.OnQueryTextListener()
         {
