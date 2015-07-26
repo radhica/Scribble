@@ -7,7 +7,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+
+import db.DatabaseHandler;
 import modelObjects.Notes;
 
 /**
@@ -18,13 +22,27 @@ public class AddNoteActivity extends ActionBarActivity {
     private EditText title;
     private EditText description;
     private Notes newNote;
+    private Intent intent;
+    DatabaseHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_note_activity);
+
+        db = new DatabaseHandler(this);
+
         title = (EditText) findViewById(R.id.notes_detail_title);
         description = (EditText) findViewById(R.id.notes_details_description);
+
+        intent = getIntent();
+        if(intent.getExtras() != null){
+            if(intent.getExtras().containsKey("EDIT_NOTE")){
+                newNote = (Notes) intent.getSerializableExtra("NOTES_OBJECT");
+                title.setText(newNote.getTitle());
+                description.setText(newNote.getDescription());
+            }
+        }
     }
 
     @Override
@@ -40,7 +58,10 @@ public class AddNoteActivity extends ActionBarActivity {
         Intent backIntent = new Intent();
         switch (item.getItemId()) {
             case R.id.action_save:
-                newNote = new Notes(title.getText().toString(),description.getText().toString());
+                newNote = new Notes(title.getText().toString(),
+                        description.getText().toString());
+                 db.addNote(newNote);
+
                 backIntent.putExtra("NEW_NOTE", newNote);
                 setResult(RESULT_OK, backIntent);
                 finish();
