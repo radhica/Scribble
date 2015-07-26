@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:footerDividersEnabled="true"
         android:divider="@drawable/dotted"
-        android:dividerHeight="1px">
+        android:dividerHeight="3dp">
     </com.nhaarman.listviewanimations.itemmanipulation.DynamicListView>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
