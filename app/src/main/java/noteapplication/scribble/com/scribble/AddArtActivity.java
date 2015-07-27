@@ -14,21 +14,21 @@ import android.view.View;
 
 import UIcontrols.CanvasView;
 
-public class DrawingActivity extends ActionBarActivity {
+public class AddArtActivity extends ActionBarActivity {
 
     private CanvasView customCanvas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.draw_activity);
+        setContentView(R.layout.add_art_activity);
         customCanvas = (CanvasView) findViewById(R.id.signature_canvas);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_add, menu);
         return super.onCreateOptionsMenu(menu);
 
     }

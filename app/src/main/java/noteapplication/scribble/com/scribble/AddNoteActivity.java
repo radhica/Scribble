@@ -7,9 +7,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.TextView;
-
-import java.text.SimpleDateFormat;
 
 import db.DatabaseHandler;
 import modelObjects.Notes;
@@ -48,7 +45,7 @@ public class AddNoteActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_add, menu);
         return super.onCreateOptionsMenu(menu);
 
     }
