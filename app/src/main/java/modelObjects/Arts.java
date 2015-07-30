@@ -11,25 +11,25 @@ import java.io.Serializable;
  */
 public class Arts implements Serializable {
     private int id;
-   private String title;
-   private Bitmap bmp;
-   private String lastModified;
+    private String title;
+    private Bitmap bitmap;
+    private String lastModified;
 
-    public Arts(String title, Bitmap description) {
+    public Arts(String title, Bitmap bitmap) {
         this.title = title;
-        this.bmp = description;
+        this.bitmap = bitmap;
     }
 
-    public Arts(String title, Bitmap description, String dateString) {
+    public Arts(String title, Bitmap bitmap, String dateString) {
         this.title = title;
-        this.bmp = description;
+        this.bitmap = bitmap;
         this.lastModified = dateString;
     }
 
-    public Arts(int id, String title, Bitmap description, String dateString) {
+    public Arts(int id, String title, Bitmap bitmap, String dateString) {
         this.id = id;
         this.title = title;
-        this.bmp = description;
+        this.bitmap = bitmap;
         this.lastModified = dateString;
     }
 
@@ -37,12 +37,12 @@ public class Arts implements Serializable {
 
     }
 
-    public Bitmap getDescription() {
-        return bmp;
+    public Bitmap getBitmap() {
+        return bitmap;
     }
 
-    public void setDescription(Bitmap description) {
-        this.bmp = description;
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
     }
 
     public String getTitle() {

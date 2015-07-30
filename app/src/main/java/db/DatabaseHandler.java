@@ -3,15 +3,15 @@ package db;
 /**
  * Created by rsampath on 7/25/15.
  */
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import modelObjects.Arts;
 import modelObjects.Notes;
@@ -78,7 +78,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues cv = new ContentValues();
-        cv.put(KEY_DESCRIPTION_ART, Arts.getBytes(art.getDescription()));
+        cv.put(KEY_DESCRIPTION_ART, Arts.getBytes(art.getBitmap()));
         cv.put(KEY_TITLE_ART, art.getTitle());
 
         db.insert(TABLE_ARTS, null, cv);

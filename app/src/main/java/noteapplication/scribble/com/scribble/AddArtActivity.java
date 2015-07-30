@@ -6,10 +6,8 @@ package noteapplication.scribble.com.scribble;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -46,8 +44,6 @@ public class AddArtActivity extends ActionBarActivity {
                 content.setDrawingCacheEnabled(true);
                 content.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
                 Bitmap bitmap = content.getDrawingCache();
-
-
                 setResult(RESULT_OK, backIntent);
                 finish();
                 return true;
