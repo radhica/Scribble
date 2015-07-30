@@ -5,8 +5,11 @@ package noteapplication.scribble.com.scribble;
  */
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,6 +19,7 @@ import UIcontrols.CanvasView;
 
 public class AddArtActivity extends ActionBarActivity {
 
+    private static final String TAG = AddArtActivity.class.getCanonicalName();
     private CanvasView customCanvas;
 
     @Override
@@ -38,6 +42,12 @@ public class AddArtActivity extends ActionBarActivity {
         Intent backIntent = new Intent();
         switch (item.getItemId()) {
             case R.id.action_save:
+                View content = customCanvas;
+                content.setDrawingCacheEnabled(true);
+                content.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
+                Bitmap bitmap = content.getDrawingCache();
+
+
                 setResult(RESULT_OK, backIntent);
                 finish();
                 return true;
