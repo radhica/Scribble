@@ -37,7 +37,7 @@ public class MainActivity extends BaseActivity {
     private NotesAdapter notesAdapter = null;
 
     private ArrayList<Notes> listOfNotes;
-    DatabaseHandler db;
+    private DatabaseHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,12 +99,14 @@ public class MainActivity extends BaseActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
             menu.collapse();
+
             switch (requestCode) {
                 case NOTE_REQUEST_CODE:
                     if (data != null) {
-                        Object object = data.getSerializableExtra("NEW_NOTE");
-                        if (object != null) {
-                            listOfNotes.add((Notes) object);
+                        boolean noteChanged = (boolean) data.getSerializableExtra("NOTE_CHANGED");
+                        if (noteChanged) {
+                            listOfNotes.clear();
+                            listOfNotes.addAll(db.getAllNotes());
                             notesAdapter.notifyDataSetChanged();
                         }
                     }

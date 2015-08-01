@@ -6,6 +6,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.FrameLayout;
 
 import fragments.NavigationDrawerFragment;
@@ -19,7 +20,7 @@ public class BaseActivity extends ActionBarActivity
      */
     protected NavigationDrawerFragment mNavigationDrawerFragment;
     protected int currentPosition;
-    protected int navDrawerIcon = R.drawable.note_app24x24;
+    protected int navDrawerIcon;
     protected FrameLayout frameLayout;
     protected ActionBar actionBar;
     /**
@@ -41,7 +42,7 @@ public class BaseActivity extends ActionBarActivity
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
-                (DrawerLayout) findViewById(R.id.drawer_layout), navDrawerIcon, currentPosition);
+                (DrawerLayout) findViewById(R.id.drawer_layout), R.drawable.note_app24x24, currentPosition);
     }
 
     @Override
@@ -76,7 +77,7 @@ public class BaseActivity extends ActionBarActivity
 
     public void restoreActionBar() {
         actionBar.setDisplayShowTitleEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setTitle(mTitle);
     }
 
@@ -93,4 +94,10 @@ public class BaseActivity extends ActionBarActivity
         }
         return super.onCreateOptionsMenu(menu);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return super.onOptionsItemSelected(item);
+    }
+
 }

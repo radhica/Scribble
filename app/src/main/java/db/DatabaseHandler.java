@@ -31,10 +31,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     private static final String TABLE_ARTS = "Arts";
 
-    private static final String KEY_ID_ART = "note_id";
-    private static final String KEY_TITLE_ART = "note_title";
-    private static final String KEY_DESCRIPTION_ART = "note_photo_blob";
-    private static final String KEY_DATE_MODIFIED_ART = "note_lastModified";
+    private static final String KEY_ID_ART = "art_id";
+    private static final String KEY_TITLE_ART = "art_title";
+    private static final String KEY_DESCRIPTION_ART = "art_photo_blob";
+    private static final String KEY_DATE_MODIFIED_ART = "art_lastModified";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -60,6 +60,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ARTS);
         onCreate(db);
     }
 
@@ -117,7 +118,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public List<Notes> getAllNotes() {
         List<Notes> notesList = new ArrayList<>();
-        String selectQuery = "SELECT  * FROM " + TABLE_NOTES;
+        String selectQuery = "SELECT  * FROM " + TABLE_NOTES + " ORDER BY " + KEY_DATE_MODIFIED_NOTE + " DESC";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

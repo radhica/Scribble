@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -23,7 +24,7 @@ import android.widget.ListView;
 import noteapplication.scribble.com.scribble.R;
 
 
-public class NavigationDrawerFragment extends android.support.v4.app.Fragment {
+public class NavigationDrawerFragment extends Fragment {
 
     /**
      * Remember the position of the selected item.
@@ -126,8 +127,10 @@ public class NavigationDrawerFragment extends android.support.v4.app.Fragment {
         // set up the drawer's list view with items and click listener
 
         ActionBar actionBar = getActionBar();
+        actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
+
 
         // ActionBarDrawerToggle ties together the the proper interactions
         // between the navigation drawer and the action bar app icon.
@@ -263,6 +266,7 @@ public class NavigationDrawerFragment extends android.support.v4.app.Fragment {
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setTitle(R.string.app_name);
+
     }
 
     private ActionBar getActionBar() {
