@@ -49,11 +49,11 @@ public class BaseActivity extends ActionBarActivity
     public void onNavigationDrawerItemSelected(int position) {
         Intent intent = null;
         switch (position) {
-            case 1:
+            case 0:
                 intent = new Intent(this, MainActivity.class);
                 break;
-            case 2:
-                intent = new Intent(this, MainActivity.class);
+            case 1:
+                intent = new Intent(this, ViewArtActivity.class);
                 break;
             default:
                 return;

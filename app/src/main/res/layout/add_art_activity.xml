@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical" >
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/art_title"
+        android:hint="Please enter a title"
+        android:visibility="gone"/>
 
     <UIcontrols.CanvasView
         android:id="@+id/signature_canvas"
@@ -21,4 +27,4 @@
         android:onClick="clearCanvas"
         android:text="@string/clear_canvas" />
 
-</FrameLayout>
+</LinearLayout>

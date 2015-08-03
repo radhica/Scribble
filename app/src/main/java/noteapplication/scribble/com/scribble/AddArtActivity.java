@@ -12,19 +12,33 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import UIcontrols.CanvasView;
+import db.DatabaseHandler;
+import modelObjects.Arts;
 
 public class AddArtActivity extends ActionBarActivity {
 
     private static final String TAG = AddArtActivity.class.getCanonicalName();
     private CanvasView customCanvas;
+    private EditText artTitle;
+    DatabaseHandler db;
+    private Arts art;
+    private boolean enteredTitle        ;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_art_activity);
+
+        db = new DatabaseHandler(this);
+
+
         customCanvas = (CanvasView) findViewById(R.id.signature_canvas);
+        artTitle = (EditText) findViewById(R.id.art_title);
+
     }
 
     @Override
@@ -40,12 +54,28 @@ public class AddArtActivity extends ActionBarActivity {
         Intent backIntent = new Intent();
         switch (item.getItemId()) {
             case R.id.action_save:
+
                 View content = customCanvas;
                 content.setDrawingCacheEnabled(true);
                 content.setDrawingCacheQuality(View.DRAWING_CACHE_QUALITY_HIGH);
                 Bitmap bitmap = content.getDrawingCache();
-                setResult(RESULT_OK, backIntent);
-                finish();
+
+                if(enteredTitle) {
+                    if(artTitle.getText().toString().length() == 0){
+                        artTitle.setError("ERROR");
+                    } else {
+                        art = new Arts(artTitle.getText().toString(), bitmap);
+                        db.addArt(art);
+                        setResult(RESULT_OK, backIntent);
+                        finish();
+                    }
+                } else {
+                    artTitle.setVisibility(View.VISIBLE);
+                    enteredTitle = true;
+
+                }
+
+
                 return true;
             case R.id.action_discard:
                 setResult(RESULT_OK, backIntent);
