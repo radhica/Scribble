@@ -2,6 +2,7 @@ package noteapplication.scribble.com.scribble;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -13,10 +14,8 @@ import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCa
 import java.util.ArrayList;
 
 import adapters.ArtsAdapter;
-import adapters.NotesAdapter;
 import db.DatabaseHandler;
 import modelObjects.Arts;
-import modelObjects.Notes;
 
 /**
  * Created by rsampath on 7/31/15.
@@ -60,6 +59,12 @@ public class ViewArtActivity extends BaseActivity{
                     }
                 }
         );
+    }
+
+    @Override
+    public void restoreActionBar() {
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(R.string.art);
     }
 
 }

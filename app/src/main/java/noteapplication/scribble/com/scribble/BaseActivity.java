@@ -64,17 +64,6 @@ public class BaseActivity extends ActionBarActivity
         finish();
     }
 
-    protected void onSectionAttached(int number) {
-        switch (number) {
-            case 1:
-                mTitle = getString(R.string.note);
-                break;
-            case 2:
-                mTitle = getString(R.string.art);
-                break;
-        }
-    }
-
     public void restoreActionBar() {
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);

@@ -150,8 +150,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             do {
                 Arts art = new Arts();
                 art.setId(Integer.parseInt(cursor.getString(0)));
-                art.setTitle(cursor.getString(1));
-                art.setBitmap(Arts.getPhoto(cursor.getBlob(2)));
+                art.setBitmap(Arts.getPhoto(cursor.getBlob(1)));
+                art.setTitle(cursor.getString(2));
                 art .setLastModified(cursor.getString(3));
                 artsList.add(art);
             } while (cursor.moveToNext());
