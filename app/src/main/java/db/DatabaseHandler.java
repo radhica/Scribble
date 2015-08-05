@@ -83,6 +83,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         cv.put(KEY_TITLE_ART, art.getTitle());
 
         db.insert(TABLE_ARTS, null, cv);
+        db.close();
     }
 
     public Notes getNote(int id) {
@@ -137,6 +138,28 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return notesList;
     }
 
+
+    public List<Arts> getAllArt() {
+        List<Arts> artsList = new ArrayList<>();
+        String selectQuery = "SELECT  * FROM " + TABLE_ARTS;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Arts art = new Arts();
+                art.setId(Integer.parseInt(cursor.getString(0)));
+                art.setTitle(cursor.getString(1));
+                art.setBitmap(Arts.getPhoto(cursor.getBlob(2)));
+                art .setLastModified(cursor.getString(3));
+                artsList.add(art);
+            } while (cursor.moveToNext());
+        }
+
+        return artsList;
+    }
+
     public int updateNote(Notes note) {
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -155,6 +178,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 new String[] { String.valueOf(note.getId()) });
         db.close();
     }
+
+    public void deleteArt(Arts art) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_ARTS, KEY_ID_ART + " = ?",
+                new String[] { String.valueOf(art.getId()) });
+        db.close();
+    }
+
 
 
     public int getNotesCount() {
