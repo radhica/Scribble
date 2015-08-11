@@ -5,15 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Filter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import modelObjects.Arts;
 import modelObjects.Arts;
 import noteapplication.scribble.com.scribble.R;
 
@@ -58,44 +54,37 @@ public class ArtsAdapter extends ArrayAdapter<Arts> {
     }
 
 
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         ViewHolder viewHolder;
 
-        if(convertView==null){
+        if (convertView == null) {
 
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.list_item_arts, parent, false);
 
             viewHolder = new ViewHolder();
             viewHolder.title = (TextView) convertView.findViewById(R.id.art_title_list_item);
-            viewHolder.description = (ImageView) convertView.findViewById(R.id.art_list_item);
-            //viewHolder.lastModified = (TextView) convertView.findViewById(R.id.item_arts_last_modified);
+            viewHolder.lastModified = (TextView) convertView.findViewById(R.id.item_art_last_modified);
 
             convertView.setTag(viewHolder);
 
-        }else{
+        } else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
 
         Arts artsObject = getItem(position);
         viewHolder.title.setText(artsObject.getTitle());
-        viewHolder.description.setImageBitmap(artsObject.getBitmap());
-
-
+        viewHolder.lastModified.setText(artsObject.getLastModified());
 
         return convertView;
     }
 
     public static class ViewHolder {
         public TextView title;
-        public ImageView description;
         public TextView lastModified;
     }
 
-
-
-    }
+}
 

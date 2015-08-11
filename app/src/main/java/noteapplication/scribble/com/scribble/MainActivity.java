@@ -13,7 +13,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
@@ -28,11 +27,6 @@ import modelObjects.Notes;
 
 
 public class MainActivity extends BaseActivity {
-    private static final int NOTE_REQUEST_CODE = 1000;
-    private static final int ART_REQUEST_CODE = 1001;
-    private FloatingActionButton addNote;
-    private FloatingActionButton addArt;
-    private FloatingActionsMenu menu;
     private DynamicListView listViewNotes;
     private NotesAdapter notesAdapter = null;
 
@@ -160,7 +154,6 @@ public class MainActivity extends BaseActivity {
     }
 
     private void handleOnItemOnSettings(int position) {
-        Toast.makeText(this, notesAdapter.getItem(position).getTitle(), Toast.LENGTH_LONG).show();
         Intent newIntent = new Intent(MainActivity.this, AddNoteActivity.class);
         newIntent.putExtra("NOTES_OBJECT", notesAdapter.getItem(position));
         newIntent.putExtra("EDIT_NOTE", true);

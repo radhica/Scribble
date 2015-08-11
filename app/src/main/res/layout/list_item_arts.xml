@@ -1,20 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+    >
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
     <TextView
         android:id="@+id/art_title_list_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="EMPLOYEE_PHOTO" />
+        android:paddingTop="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/blue_semi_transparent"
+        />
 
-    <ImageView
-        android:id="@+id/art_list_item"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp" />
+        android:weightSum="1">
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_title_art_last_modified"
+            android:layout_weight="0.5"
+            android:text="@string/last_modified"
+            android:gravity="end"
+
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_art_last_modified"
+            android:layout_weight="0.5"
+            android:gravity="end"
+            />
+    </LinearLayout>
 </LinearLayout>
+</FrameLayout>

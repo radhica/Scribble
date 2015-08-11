@@ -9,6 +9,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
+
 import fragments.NavigationDrawerFragment;
 
 
@@ -23,6 +26,12 @@ public class BaseActivity extends ActionBarActivity
     protected int navDrawerIcon;
     protected FrameLayout frameLayout;
     protected ActionBar actionBar;
+    protected FloatingActionButton addNote;
+    protected FloatingActionButton addArt;
+    protected FloatingActionsMenu menu;
+
+    protected static final int NOTE_REQUEST_CODE = 1000;
+    protected static final int ART_REQUEST_CODE = 1001;
     /**
      * Used to store the last screen title. For use in {@link #restoreActionBar()}.
      */

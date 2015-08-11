@@ -23,9 +23,11 @@ public class AddArtActivity extends ActionBarActivity {
     private static final String TAG = AddArtActivity.class.getCanonicalName();
     private CanvasView customCanvas;
     private EditText artTitle;
-    DatabaseHandler db;
+    private DatabaseHandler db;
     private Arts art;
-    private boolean enteredTitle        ;
+    private Intent intent;
+    private boolean enteredTitle;
+    private boolean editArt;
 
 
     @Override
@@ -35,9 +37,17 @@ public class AddArtActivity extends ActionBarActivity {
 
         db = new DatabaseHandler(this);
 
-
         customCanvas = (CanvasView) findViewById(R.id.signature_canvas);
         artTitle = (EditText) findViewById(R.id.art_title);
+
+        intent = getIntent();
+        if (intent.getExtras() != null) {
+            if (intent.getExtras().containsKey("EDIT_ART")) {
+              //  art = (Arts) intent.getSerializableExtra("ARTS_OBJECT");
+             //   artTitle.setText(art.getTitle());
+                editArt = true;
+            }
+        }
 
     }
 

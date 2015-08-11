@@ -141,7 +141,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public List<Arts> getAllArt() {
         List<Arts> artsList = new ArrayList<>();
-        String selectQuery = "SELECT  * FROM " + TABLE_ARTS;
+        String selectQuery = "SELECT  * FROM " + TABLE_ARTS + " ORDER BY " + KEY_DATE_MODIFIED_ART + " DESC";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);

@@ -1,13 +1,15 @@
 package noteapplication.scribble.com.scribble;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
 
@@ -20,7 +22,7 @@ import modelObjects.Arts;
 /**
  * Created by rsampath on 7/31/15.
  */
-public class ViewArtActivity extends BaseActivity{
+public class ViewArtActivity extends BaseActivity {
     private DynamicListView listViewArts;
     private DatabaseHandler db;
     private ArrayList<Arts> listOfArts;
@@ -42,8 +44,7 @@ public class ViewArtActivity extends BaseActivity{
         listViewArts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-              //  handleOnItemOnSettings(position);
-                Toast.makeText(getApplicationContext(),""+position,Toast.LENGTH_LONG).show();
+                handleOnItemOnSettings(position);
             }
         });
 
@@ -59,12 +60,55 @@ public class ViewArtActivity extends BaseActivity{
                     }
                 }
         );
+
+        menu = (FloatingActionsMenu) findViewById(R.id.add_actions);
+        addArt = (FloatingActionButton) findViewById(R.id.action_add_art);
+        addArt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent newIntent = new Intent(ViewArtActivity.this, AddArtActivity.class);
+                newIntent.putExtra("EDIT_NOTE", false);
+                startActivityForResult(newIntent, ART_REQUEST_CODE);
+            }
+        });
+
+        addNote = (FloatingActionButton) findViewById(R.id.action_add_note);
+        addNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent newIntent = new Intent(ViewArtActivity.this, AddNoteActivity.class);
+                startActivityForResult(newIntent, NOTE_REQUEST_CODE);
+            }
+        });
     }
 
     @Override
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(R.string.art);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            menu.collapse();
+            switch (requestCode) {
+                case ART_REQUEST_CODE:
+                    if (data != null) {
+                        listOfArts.clear();
+                        listOfArts.addAll(db.getAllArt());
+                        artsAdapter.notifyDataSetChanged();
+                    }
+                    break;
+            }
+        }
+    }
+
+    private void handleOnItemOnSettings(int position) {
+        Intent newIntent = new Intent(ViewArtActivity.this, AddArtActivity.class);
+        // newIntent.putExtra("ARTS_OBJECT", artsAdapter.getItem(position));
+        newIntent.putExtra("EDIT_ART", true);
+        startActivityForResult(newIntent, ART_REQUEST_CODE);
     }
 
 }
