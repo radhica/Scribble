@@ -12,6 +12,7 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.nhaarman.listviewanimations.itemmanipulation.DynamicListView;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
+import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.undo.SimpleSwipeUndoAdapter;
 
 import java.util.ArrayList;
 
@@ -48,7 +49,7 @@ public class ViewArtActivity extends BaseActivity {
             }
         });
 
-        listViewArts.enableSwipeToDismiss(
+        SimpleSwipeUndoAdapter swipeUndoAdapter = new SimpleSwipeUndoAdapter(artsAdapter, ViewArtActivity.this,
                 new OnDismissCallback() {
                     @Override
                     public void onDismiss(@NonNull final ViewGroup listView, @NonNull final int[] reverseSortedPositions) {
@@ -60,6 +61,9 @@ public class ViewArtActivity extends BaseActivity {
                     }
                 }
         );
+        swipeUndoAdapter.setAbsListView(listViewArts);
+        listViewArts.setAdapter(swipeUndoAdapter);
+        listViewArts.enableSimpleSwipeUndo();
 
         menu = (FloatingActionsMenu) findViewById(R.id.add_actions);
         addArt = (FloatingActionButton) findViewById(R.id.action_add_art);

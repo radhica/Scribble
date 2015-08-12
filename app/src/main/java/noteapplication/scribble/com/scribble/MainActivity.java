@@ -54,21 +54,6 @@ public class MainActivity extends BaseActivity {
             }
         });
 
-//        listViewNotes.enableSwipeToDismiss(
-//                new OnDismissCallback() {
-//                    @Override
-//                    public void onDismiss(@NonNull final ViewGroup listView, @NonNull final int[] reverseSortedPositions) {
-//
-//                        for (int position : reverseSortedPositions) {
-//                            db.deleteNote(notesAdapter.getItem(position));
-//                            notesAdapter.remove(position);
-//                            notesAdapter.notifyDataSetChanged();
-//                        }
-//                    }
-//                }
-//        );
-
-
         SimpleSwipeUndoAdapter swipeUndoAdapter = new SimpleSwipeUndoAdapter(notesAdapter, MainActivity.this,
                 new OnDismissCallback() {
                     @Override
