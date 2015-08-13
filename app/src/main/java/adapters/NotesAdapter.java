@@ -1,27 +1,37 @@
 package adapters;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.nhaarman.listviewanimations.itemmanipulation.dragdrop.OnItemMovedListener;
+import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
+import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.undo.UndoAdapter;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import modelObjects.Notes;
+import noteapplication.scribble.com.scribble.MainActivity;
 import noteapplication.scribble.com.scribble.R;
 
 /**
  * Created by rsampath on 7/24/15.
  */
-public class NotesAdapter extends ArrayAdapter<Notes> {
+public class NotesAdapter extends ArrayAdapter<Notes> implements UndoAdapter {
     ArrayList<Notes> notes = new ArrayList<>();
     ArrayList<Notes> filteredList = new ArrayList<>();
     private NoteFilter noteFilter;
+    private Context context;
 
     public NotesAdapter(Context context, int textViewResourceId) {
         super(context, textViewResourceId);
@@ -31,6 +41,7 @@ public class NotesAdapter extends ArrayAdapter<Notes> {
         super(context, resource, items);
         this.notes = (ArrayList<Notes>) items;
         this.filteredList = (ArrayList<Notes>) items;
+        this.context = context;
         getFilter();
     }
 
@@ -101,6 +112,23 @@ public class NotesAdapter extends ArrayAdapter<Notes> {
         viewHolder.lastModified.setText(dateString);
 
         return convertView;
+
+    }
+
+    @NonNull
+    @Override
+    public View getUndoView(int i, @Nullable View v, @NonNull ViewGroup viewGroup) {
+        View view = v;
+        if (view == null) {
+            view = LayoutInflater.from(context).inflate(R.layout.undo_row, viewGroup, false);
+        }
+        return view;
+    }
+
+    @NonNull
+    @Override
+    public View getUndoClickView(@NonNull View view) {
+        return view.findViewById(R.id.undo_row_undobutton);
     }
 
     public static class ViewHolder {
@@ -154,6 +182,5 @@ public class NotesAdapter extends ArrayAdapter<Notes> {
     }
 
 
-
-    }
+}
 
