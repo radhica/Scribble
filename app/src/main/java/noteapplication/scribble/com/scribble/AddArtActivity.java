@@ -6,6 +6,7 @@ package noteapplication.scribble.com.scribble;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -43,8 +44,10 @@ public class AddArtActivity extends ActionBarActivity {
         intent = getIntent();
         if (intent.getExtras() != null) {
             if (intent.getExtras().containsKey("EDIT_ART")) {
-              //  art = (Arts) intent.getSerializableExtra("ARTS_OBJECT");
-             //   artTitle.setText(art.getTitle());
+                art = (Arts) intent.getSerializableExtra("ARTS_OBJECT");
+                Arts arts = db.getArt(art.getId());
+                artTitle.setText(arts.getTitle());
+                customCanvas.setBackgroundDrawable(new BitmapDrawable(arts.getBitmap()));
                 editArt = true;
             }
         }
@@ -73,7 +76,14 @@ public class AddArtActivity extends ActionBarActivity {
                 if(enteredTitle) {
                     if(artTitle.getText().toString().length() == 0){
                         artTitle.setError("ERROR");
-                    } else {
+                    } else if(editArt) {
+                        art.setBitmap(bitmap);
+                        art.setTitle(artTitle.getText().toString());
+                        db.updateArt(art);
+                        setResult(RESULT_OK, backIntent);
+                        finish();
+                    }
+                    else{
                         art = new Arts(artTitle.getText().toString(), bitmap);
                         db.addArt(art);
                         setResult(RESULT_OK, backIntent);
@@ -84,8 +94,6 @@ public class AddArtActivity extends ActionBarActivity {
                     enteredTitle = true;
 
                 }
-
-
                 return true;
             case R.id.action_discard:
                 setResult(RESULT_OK, backIntent);

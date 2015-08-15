@@ -110,7 +110,7 @@ public class ViewArtActivity extends BaseActivity {
 
     private void handleOnItemOnSettings(int position) {
         Intent newIntent = new Intent(ViewArtActivity.this, AddArtActivity.class);
-        // newIntent.putExtra("ARTS_OBJECT", artsAdapter.getItem(position));
+        newIntent.putExtra("ARTS_OBJECT", artsAdapter.getItem(position));
         newIntent.putExtra("EDIT_ART", true);
         startActivityForResult(newIntent, ART_REQUEST_CODE);
     }

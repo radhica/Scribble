@@ -3,6 +3,7 @@ package db;
 /**
  * Created by rsampath on 7/25/15.
  */
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -89,9 +90,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public Notes getNote(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(TABLE_NOTES, new String[] {KEY_ID_NOTE,
+        Cursor cursor = db.query(TABLE_NOTES, new String[]{KEY_ID_NOTE,
                         KEY_TITLE_NOTE, KEY_DESCRIPTION_NOTE, KEY_DATE_MODIFIED_NOTE}, KEY_ID_NOTE + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+                new String[]{String.valueOf(id)}, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
@@ -103,9 +104,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public Arts getArt(int id) throws SQLException {
         SQLiteDatabase db = this.getReadableDatabase();
 
-        Cursor cursor = db.query(true, TABLE_ARTS, new String[] { KEY_ID_ART,
-                KEY_TITLE_ART, KEY_DESCRIPTION_ART, KEY_DATE_MODIFIED_ART }, KEY_ID_ART + "=?",
-                new String[] { String.valueOf(id) }, null, null, null, null);
+        Cursor cursor = db.query(true, TABLE_ARTS, new String[]{KEY_ID_ART,
+                        KEY_TITLE_ART, KEY_DESCRIPTION_ART, KEY_DATE_MODIFIED_ART}, KEY_ID_ART + "=?",
+                new String[]{String.valueOf(id)}, null, null, null, null);
 
         if (cursor != null)
             cursor.moveToFirst();
@@ -130,7 +131,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 note.setId(Integer.parseInt(cursor.getString(0)));
                 note.setTitle(cursor.getString(1));
                 note.setDescription(cursor.getString(2));
-                note .setLastModified(cursor.getString(3));
+                note.setLastModified(cursor.getString(3));
                 notesList.add(note);
             } while (cursor.moveToNext());
         }
@@ -141,7 +142,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public List<Arts> getAllArt() {
         List<Arts> artsList = new ArrayList<>();
-        String selectQuery = "SELECT  * FROM " + TABLE_ARTS + " ORDER BY " + KEY_DATE_MODIFIED_ART + " DESC";
+        String selectQuery = "SELECT " + KEY_ID_ART + " , " +
+                KEY_TITLE_ART + " , " + KEY_DATE_MODIFIED_ART + " FROM " + TABLE_ARTS + " ORDER BY " + KEY_DATE_MODIFIED_ART + " DESC";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -150,9 +152,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
             do {
                 Arts art = new Arts();
                 art.setId(Integer.parseInt(cursor.getString(0)));
-                art.setBitmap(Arts.getPhoto(cursor.getBlob(1)));
-                art.setTitle(cursor.getString(2));
-                art .setLastModified(cursor.getString(3));
+                art.setTitle(cursor.getString(1));
+                art.setLastModified(cursor.getString(2));
                 artsList.add(art);
             } while (cursor.moveToNext());
         }
@@ -169,23 +170,34 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_DATE_MODIFIED_NOTE, note.getLastModified());
 
         return db.update(TABLE_NOTES, values, KEY_ID_NOTE + " = ?",
-                new String[] { String.valueOf(note.getId()) });
+                new String[]{String.valueOf(note.getId())});
+    }
+
+    public int updateArt(Arts art) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_TITLE_ART, art.getTitle());
+        values.put(KEY_DESCRIPTION_ART, Arts.getBytes(art.getBitmap()));
+        values.put(KEY_DATE_MODIFIED_ART, art.getLastModified());
+
+        return db.update(TABLE_ARTS, values, KEY_ID_ART + " = ?",
+                new String[]{String.valueOf(art.getId())});
     }
 
     public void deleteNote(Notes note) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_NOTES, KEY_ID_NOTE + " = ?",
-                new String[] { String.valueOf(note.getId()) });
+                new String[]{String.valueOf(note.getId())});
         db.close();
     }
 
     public void deleteArt(Arts art) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_ARTS, KEY_ID_ART + " = ?",
-                new String[] { String.valueOf(art.getId()) });
+                new String[]{String.valueOf(art.getId())});
         db.close();
     }
-
 
 
     public int getNotesCount() {
