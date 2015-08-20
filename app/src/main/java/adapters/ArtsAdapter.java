@@ -85,7 +85,6 @@ public class ArtsAdapter extends ArrayAdapter<Arts> implements UndoAdapter{
         Arts artsObject = getItem(position);
         viewHolder.title.setText(artsObject.getTitle());
         viewHolder.lastModified.setText(artsObject.getLastModified());
-
         return convertView;
     }
 

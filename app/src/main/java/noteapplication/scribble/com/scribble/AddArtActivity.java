@@ -15,6 +15,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+
 import UIcontrols.CanvasView;
 import db.DatabaseHandler;
 import modelObjects.Arts;
@@ -79,12 +82,14 @@ public class AddArtActivity extends ActionBarActivity {
                     } else if(editArt) {
                         art.setBitmap(bitmap);
                         art.setTitle(artTitle.getText().toString());
+                        art.setLastModified(new SimpleDateFormat("MMM dd, yyyy h:mm a").format(new Timestamp(System.currentTimeMillis())));
                         db.updateArt(art);
                         setResult(RESULT_OK, backIntent);
                         finish();
                     }
                     else{
                         art = new Arts(artTitle.getText().toString(), bitmap);
+                        art.setLastModified(new SimpleDateFormat("MMM dd, yyyy h:mm a").format(new Timestamp(System.currentTimeMillis())));
                         db.addArt(art);
                         setResult(RESULT_OK, backIntent);
                         finish();

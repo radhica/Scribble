@@ -8,8 +8,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.EditText;
 
-import java.text.SimpleDateFormat;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 
 import db.DatabaseHandler;
 import modelObjects.Notes;
@@ -63,11 +63,12 @@ public class AddNoteActivity extends ActionBarActivity {
                 if (editNote) {
                     newNote.setDescription(description.getText().toString());
                     newNote.setTitle(title.getText().toString());
-                    newNote.setLastModified(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Timestamp(System.currentTimeMillis())));
+                    newNote.setLastModified(new SimpleDateFormat("MMM dd, yyyy h:mm a").format(new Timestamp(System.currentTimeMillis())));
                     db.updateNote(newNote);
                 } else {
                     newNote = new Notes(title.getText().toString(),
                             description.getText().toString());
+                    newNote.setLastModified(new SimpleDateFormat("MMM dd, yyyy h:mm a").format(new Timestamp(System.currentTimeMillis())));
                     db.addNote(newNote);
                 }
                 backIntent.putExtra("NOTE_CHANGED", true);

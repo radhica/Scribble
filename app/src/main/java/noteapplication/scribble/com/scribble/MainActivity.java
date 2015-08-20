@@ -101,12 +101,9 @@ public class MainActivity extends BaseActivity {
             switch (requestCode) {
                 case NOTE_REQUEST_CODE:
                     if (data != null) {
-                        boolean noteChanged = (boolean) data.getSerializableExtra("NOTE_CHANGED");
-                        if (noteChanged) {
-                            listOfNotes.clear();
-                            listOfNotes.addAll(db.getAllNotes());
-                            notesAdapter.notifyDataSetChanged();
-                        }
+                        listOfNotes.clear();
+                        listOfNotes.addAll(db.getAllNotes());
+                        notesAdapter.notifyDataSetChanged();
                     }
                     break;
             }
@@ -130,7 +127,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public boolean onQueryTextChange(String newText) {
                 notesAdapter.getFilter().filter(newText);
-                System.out.println("on text chnge text: " + newText);
+                System.out.println("on text change text: " + newText);
                 return true;
             }
 

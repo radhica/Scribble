@@ -9,19 +9,13 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.nhaarman.listviewanimations.itemmanipulation.dragdrop.OnItemMovedListener;
-import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.OnDismissCallback;
 import com.nhaarman.listviewanimations.itemmanipulation.swipedismiss.undo.UndoAdapter;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import modelObjects.Notes;
-import noteapplication.scribble.com.scribble.MainActivity;
 import noteapplication.scribble.com.scribble.R;
 
 /**
@@ -104,12 +98,7 @@ public class NotesAdapter extends ArrayAdapter<Notes> implements UndoAdapter {
         String firstLine = notesObject.getDescription();
         String lines[] = firstLine.split("\\r?\\n");
         viewHolder.description.setText(lines[0]);
-
-        long date = System.currentTimeMillis();
-
-        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy h:mm a");
-        String dateString = sdf.format(date);
-        viewHolder.lastModified.setText(dateString);
+        viewHolder.lastModified.setText(notesObject.getLastModified());
 
         return convertView;
 
